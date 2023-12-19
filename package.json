@@ -1,0 +1,49 @@
+{
+  "name": "cypressts",
+  "version": "1.0.0",
+  "description": "Cypress with Typescript - Apex",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "cypress-after-test": "mochawesome-merge cypress/report/*.json -o cypress/report/report/report.json && marge cypress/report/report.json -f report -o cypress/report",
+    "cypress-before-test": "rimraf cypress/report && mkdirp cypress/report",
+    "cypress:open": "cypress open",
+    "automatic:runner": "cypress open --e2e --browser chrome",
+    "automatic:runner:baseUrl": "cypress open --e2e --browser chrome --config baseUrl=https://www.google.com",
+    "automatic:runner:envVars": "cypress open --e2e --browser chrome --config baseUrl=https://uitestingplayground.com/ --env demoVar=Hello_From_Package_File",
+    "cypress-run": "cypress run --browser chrome --spec cypress/e2e/**.cy.ts --record --key 29f759ea-dc5d-404a-8e33-94f8f803f4d6",
+    "runner-mobile": "cypress open --e2e --browser chrome --config baseUrl=https://uitestingplayground.com/,viewportWidth=100",
+    "cypress-dashboard-parallel": "cypress run --browser chrome --record --key 29f759ea-dc5d-404a-8e33-94f8f803f4d6 --spec cypress/e2e/parallel-test/*.ts --parallel",
+    "cypress-local-suite": "cypress run --browser chrome --record --key 29f759ea-dc5d-404a-8e33-94f8f803f4d6 --spec cypress/e2e/parallel-test/*.ts --parallel --ci-build-id JUST_TESTING_LOCALLY",
+    "cypress-api-suite": "cypress run --e2e --browser chrome  --spec cypress/e2e/api-collections/**/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/APEX-Projects/CypressTS.git"
+  },
+  "keywords": [
+    "Apex",
+    "Cypress",
+    "Typescript"
+  ],
+  "author": "Edwin Arroyo Moreno",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/APEX-Projects/CypressTS/issues"
+  },
+  "homepage": "https://github.com/APEX-Projects/CypressTS#readme",
+  "devDependencies": {
+    "@4tw/cypress-drag-drop": "^2.2.3",
+    "@cypress/xpath": "^2.0.3",
+    "@faker-js/faker": "^7.6.0",
+    "@testing-library/cypress": "^9.0.0",
+    "cy-verify-downloads": "^0.1.11",
+    "cypress": "^12.9.0",
+    "cypress-file-upload": "^5.0.8",
+    "cypress-mochawesome-reporter": "^3.3.0",
+    "cypress-real-events": "^1.7.6",
+    "mysql": "github:mysqljs/mysql",
+    "node-xlsx": "^0.21.0",
+    "typescript": "^4.9.4"
+  }
+}

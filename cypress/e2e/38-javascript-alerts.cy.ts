@@ -1,0 +1,43 @@
+describe('Javascript alert', () => {
+  beforeEach(() => {
+    cy.visit(`${Cypress.env('theInternet')}javascript_alerts`)
+  });
+  it.skip('Javascript Alerts, assert message', () => {
+    cy.contains('button','Click for JS Alert').click()
+    // We are going to use Event Types - Catalog events
+    cy.on('window:alert', (message) => {
+      expect(message).to.be.equal('I am a JS Alert')
+    })
+    cy.on('window:confirm', () => true)
+    cy.get('p#result').should('have.text', 'You successfully clicked an alert')
+  })
+
+    it.skip('Javascript Alert Confirm(Accept)', () => {
+      cy.contains('button','Click for JS Confirm').click()
+    // We are going to use Event Types - Catalog events
+    cy.on('window:confirm', (message) => {
+      expect(message).to.be.equal('I am a JS Confirm')
+    })
+    cy.on('window:confirm', () => true)
+    cy.get('p#result').should('have.text','You clicked: Ok')
+    })
+
+
+    it.skip('Javascript Alert Confirm(Cancel)', () => {
+      cy.contains('button','Click for JS Confirm').click()
+      // We are going to use Event Types - Catalog events
+      cy.on('window:confirm', (message) => {
+        expect(message).to.be.equal('I am a JS Confirm')
+      })
+      cy.on('window:confirm', () => false)
+      cy.get('p#result').should('have.text','You clicked: Cancel')
+    })
+    it('Javscript Alert Prompt', () => {
+      cy.window().then((window) => {
+        cy.stub(window, 'prompt').returns('This is a hello World from the prompt alert')
+        // Stub: Replace a function, record its usage and control its behavior
+        cy.contains('button','Click for JS Prompt').click()
+      })
+      cy.get('p#result').should('have.text','You entered: This is a hello World from the prompt alert')
+    })
+  });
